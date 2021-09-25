@@ -5,19 +5,20 @@ const { API_KEY } = process.env;
 const { v4: uuidv4 } = require("uuid");
 
 async function getDogs(req, res, next) {
+  console.log("getDogs")
   try {
     const apiUrl = await axios.get(
       `https://api.thedogapi.com/v1/breeds?${API_KEY}`
-      ); 
-      let apiInfo = await apiUrl.data.map((el) => {
-          return {
+    );
+    let apiInfo = await apiUrl.data.map((el) => {
+      return {
         id: el.id,
         name: el.name,
         height: el.height,
         weight: el.weight,
         life_span: el.life_span,
         image: el.image.url,
-        temperament: el.temperament
+        temperament: el.temperament,
       };
     });
 
