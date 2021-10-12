@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  width: 465px;
+  height: auto;
+  margin-top: 6%;
+
+  font-family: monospace;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 34px;
+  border: 1px solid #797979;
+  flex: 0 0 30%;
+  background-color: hsla(0, 0%, 94.5%, 0.8);
+  box-shadow: 6px 6px 10px rgb(71 71 71 / 43%);
+  /* background-image: url("../../image/card.jpg");
+  background-size: cover; */
+
+}
+
+.img {
+  justify-content: center;
+  object-fit: cover;
+  width: 40%;
+  border-bottom-left-radius: 34px;
+  border-top-left-radius: 34px;
+  border: 1px solid #797979;
+  min-height: 100%;
+}
+.info {
+  width: 60%;
+  margin-bottom: 2%;
+  /* background-image: url("../../image/card.jpg");
+  background-size: cover; */
+}
+.card:hover {
+  transform: scale(1.07);
+  background-color: greenyellow;
+  color: black;
+}
+
+.temp li {
+  display: inline-block;
+  margin-left: 5px;
+  font-weight: bolder;
+}
+.temp li:not(:last-child):after {
+  content: ",";
+}

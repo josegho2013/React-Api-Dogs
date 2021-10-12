@@ -1,84 +1,120 @@
 const { Op } = require("sequelize");
 const axios = require("axios");
-const { Dog, Temperament } = require("../db");
+const { Dog, Temperaments } = require("../db");
 const { API_KEY } = process.env;
 const { v4: uuidv4 } = require("uuid");
 
-async function getDogs(req, res, next) {
-  console.log("getDogs")
+async function getAllDogs(req, res, next) {
   try {
     const apiUrl = await axios.get(
       `https://api.thedogapi.com/v1/breeds?${API_KEY}`
-    );
-    let apiInfo = await apiUrl.data.map((el) => {
-      return {
-        id: el.id,
-        name: el.name,
-        height: el.height,
-        weight: el.weight,
-        life_span: el.life_span,
-        image: el.image.url,
-        temperament: el.temperament,
-      };
-    });
-
-    let dataBase = await Dog.findAll({
-      attributes: ["id", "name", "height", "weight", "life_span", "image"],
-      include: [
-        {
-          model: Temperament,
-          through: {
-            attributes: [],
-          },
+      );
+      let apiInfo = await apiUrl.data.map((el) => {
+        
+        return {
+          id: el.id,
+          name: el.name,
+          height: el.height.metric,
+          weight: el.weight.metric,
+          life_span: el.life_span,
+          image: el.image,
+          temperaments: el.temperament ? el.temperament.split(", ").map((a) => {return {name: a}}) : [],
+        };
+      });
+      
+      let dataBase = await Dog.findAll({
+        attributes: ["id", "name", "height", "weight", "life_span", "image"],
+        include: [
+          {
+            attributes: ["name"],
+            model: Temperaments,
+            through: {
+              attributes: [],
+            },
         },
-      ],
+      ],      
     });
-
-    let response = apiInfo.concat(dataBase);
+    
+    let response = dataBase.concat(apiInfo);
+    // let response = apiInfo.concat(dataBase);
     res.status(200).json(response);
   } catch (error) {
     next(error);
   }
 }
 
-async function searchByName(req, res, next) {
-  const search = req.query.q; // query cuando busdcas un solo dato
-  //search in API
-
+async function getDogsApi(req, res, next) {
   try {
     const apiUrl = await axios.get(
-      `https://api.thedogapi.com/v1/breeds?page_size=100&key=${API_KEY}&search=${search}`
-    );
-    let apiInfo = await apiUrl.data.results.map((item) => {
+      `https://api.thedogapi.com/v1/breeds?limit=12${API_KEY}`
+      );
+    
+    let apiInfo = await apiUrl.data.map((el) => {
       return {
-        id: item.id,
-        name: item.name,
-        height: item.height,
-        weight: item.weight,
-        life_span: item.life_span,
-        image: item.image.url,
-        temperament: item.temperament.map((p) => {
-          return p.temperament;
-        }),
+        id: el.id,
+        name: el.name,
+        height: el.height.metric,
+        weight: el.weight.metric,
+        life_span: el.life_span,
+        image: el.image,
+        temperaments: el.temperament ? el.temperament.split(", ").map((a) => {return {name: a}}) : [],
       };
     });
+    
+    return res.status(200).json(apiInfo);
+  } catch (error) {
+    next(error);
+  }
+}
 
-    //search in DB
-
-    let dataBase = await Dogs.findAll({
-      where: {
-        name: { [Op.like]: `%${search}%` },
-      },
+async function getDogsDb(req, res, next) {
+  try {
+    let dataBase = await Dog.findAll({
       attributes: ["id", "name", "height", "weight", "life_span", "image"],
       include: [
         {
-          model: Temperament,
+          model: Temperaments,
           through: {
             attributes: [],
           },
         },
       ],
     });
+
+    return res.status(200).json(dataBase);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function searchByName(req, res, next) {
+  const search = req.query.q; // query cuando buscas un solo dato
+  //search in API
+ 
+  try {
+    const apiUrl = await axios.get(
+      `https://api.thedogapi.com/v1/breeds/search?q=${search} `
+    );
+    let apiInfo = await apiUrl.data.map((item) => {
+      return item.reference_image_id;
+    });
+
+    //search in DB
+    let dataBase = await Dog.findAll({
+      where: {
+        name: { [Op.like]: `%${search}%` },
+      },
+      attributes: ["id", "name", "height", "weight", "life_span", "image"],
+      include: [
+        {
+          model: Temperaments,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+  
     let response = apiInfo.concat(dataBase);
     res.status(200).json(response);
   } catch (error) {
@@ -88,13 +124,13 @@ async function searchByName(req, res, next) {
 
 async function getDogById(req, res, next) {
   const id = req.params.id;
-
+  
   if (id.includes("-")) {
     try {
-      const dogId = await Dogs.findByPk(id, {
+      const dogId = await Dog.findByPk(id, {
         include: [
           {
-            model: Temperament,
+            model: Temperaments,
             through: {
               attributes: [],
             },
@@ -109,19 +145,30 @@ async function getDogById(req, res, next) {
     try {
       const { data } = await axios.get(
         `https://api.thedogapi.com/v1/breeds/${id}?key=${API_KEY}`
-      );
-
-      let dogs = {
-        id: data.id,
+        );
+        const apiUrl = await axios.get(
+          `https://api.thedogapi.com/v1/breeds?limit=12${API_KEY}`
+          );
+          
+          let element = {};
+          for (let i = 0; i < await apiUrl.data.length; i++) {
+            if (apiUrl.data[i].image.id === data.reference_image_id) {
+              element["id"] = apiUrl.data[i].image.id;
+              element["url"] = apiUrl.data[i].image.url;
+            }
+          }
+          
+          let dogs = {
+            id: data.id,
         name: data.name,
         height: data.height,
         weight: data.weight,
         life_span: data.life_span,
-        image: data.image,
-
-        temperament: item.temperament.map((p) => {
-          return p.temperament;
-        }),
+        image: element,
+        temperaments: data.temperament,
+        bred_for: data.bred_for,
+        breed_group: data.breed_group,
+        origin: data.origin
       };
       return res.status(200).json(dogs);
     } catch (error) {
@@ -130,33 +177,43 @@ async function getDogById(req, res, next) {
   }
 }
 
-function createDogs(req, res) {
-  const { name, weight, height, life_span, image, temperament } = req.body;
+async function createDogs(req, res) {
+  
+  let { name, weight, height, life_span, image, temperaments } = req.body;
 
-  Dogs.findOrCreate({
-    where: {
+  try {
+    let dogCreated = await Dog.create({
       id: uuidv4(),
-      name: name,
-      weight: weight,
-      height: height,
-      life_span: life_span,
-      image: image,
-    },
-  })
-    .then((newDogs) => {
-      // cuando creas el nuevo juego asignarle una plataforma y genero
-
-      // platforms.forEach((id) => newGame[0].addPlatforms(id));
-      // genres.forEach((id) => newGame[0].addGenres(id));
-      return res.status(200).json(newDogs);
-    })
-    .catch((error) => {
-      return res.status(404).send(error);
+      name,
+      weight,
+      height,
+      life_span,
+      image,
     });
+    if (temperaments.length > 0) {
+      temperaments.forEach(async (temp) => {
+        try {
+          let dbTemperament = await Temperaments.findOne({
+            where: { name: temp },
+          });
+          dogCreated.addTemperaments(dbTemperament);
+        } catch (error) {
+          next(error);
+        }
+      });
+    }
+    
+ 
+    return res.status(200).send("Creacion exitosa");
+  } catch (error) {
+    return res.send(error);
+  }
 }
 
 module.exports = {
-  getDogs,
+  getAllDogs,
+  getDogsApi,
+  getDogsDb,
   searchByName,
   getDogById,
   createDogs,

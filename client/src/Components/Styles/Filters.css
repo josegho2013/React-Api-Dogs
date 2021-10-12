@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@100;600&display=swap");
+
+.filters {
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+  margin: 5px 70px 10px;
+  font-family: "Urbanist";
+}
+.filters div {
+  display: block;
+  margin: auto;
+}
+.filters p {
+  margin-bottom: 3px;
+  font-weight: bolder;
+  text-align: initial;
+}
+.filters select {
+  height: 30px;
+  border: 1px solid green;
+  font-family: system-ui;
+}
