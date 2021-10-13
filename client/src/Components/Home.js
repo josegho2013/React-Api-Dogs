@@ -28,7 +28,7 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className= "home">
       <div className="line_dog" />
       <Filters />
       <hr className="line"></hr>

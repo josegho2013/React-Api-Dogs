@@ -11,13 +11,14 @@ import {
   filterOrderDes,
   filterByWeighLighter,
   filterByWeightHighest,
-  filterYearMenor,
-  filterYearMayor,
+  filterByHeightLow,
+  filterByHeightHigh,
 } from "../Redux/actions/actions";
 
 const Filters = () => {
   const dispatch = useDispatch();
   const temperament = useSelector(({ temperament }) => temperament);
+  const dogsAll = useSelector(({ dogsAll }) => dogsAll);
 
   useEffect(() => {
     dispatch(getTemperament());
@@ -42,11 +43,11 @@ const Filters = () => {
       dispatch(filterByWeightHighest(e.target.value));
     }
   };
-  const handleyear = (e) => {
-    if (e.target.value === "menor año") {
-      dispatch(filterYearMenor(e.target.value));
+  const handleHeight = (e) => {
+    if (e.target.value === "menor") {
+      dispatch(filterByHeightLow());
     } else {
-      dispatch(filterYearMayor(e.target.value));
+      dispatch(filterByHeightHigh());
     }
   };
   const handleDog = (e) => {
@@ -110,11 +111,11 @@ const Filters = () => {
       </div>
       <div>
         <div>
-          <p>Year</p>
-          <select onChange={(e) => handleyear(e)}>
+          <p>Height</p>
+          <select onChange={(e) => handleHeight(e)}>
             <option default>All</option>
-            <option>menor año</option>
-            <option>mayor año</option>
+            <option>menor</option>
+            <option>mayor</option>
           </select>
         </div>
       </div>

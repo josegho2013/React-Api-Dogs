@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { searchById } from "../Redux/actions/actions";
+import { searchById, dogDelete } from "../Redux/actions/actions";
 import Navbar from "./Navbar";
+import { FaDog } from "react-icons/fa";
 import Footer from "./Footer";
 import "./Styles/Detail.css";
 
 const CardDetail = ({ id }) => {
   const dispatch = useDispatch();
   const searchId = useSelector(({ searchById }) => searchById);
-
+  const [deleted, setDeleted] = useState(false);
   useEffect(() => {
     dispatch(searchById(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  const handleDelete = (id) => {
+    dispatch(dogDelete(id));
+    setDeleted(true);
+  };
+
   return (
     <div>
       <Navbar />
@@ -52,11 +59,33 @@ const CardDetail = ({ id }) => {
           <div>Loading...</div>
         )}
         <div className="back">
+          {id.includes("-") ? (
+            <button onClick={() => handleDelete(id)}>Delete</button>
+          ) : (
+            <></>
+          )}
+
           <Link to="/Home">
             <button>Go Home</button>
           </Link>
         </div>
       </div>
+      {deleted ? (
+        <div className="popUp" transition={{ duration: 0.2 }}>
+          <h1>
+            <FaDog size="5rem" />
+            GOOD <br />
+            JOB
+          </h1>
+
+          <p>your dog has been successfully eliminated!</p>
+          <Link to="/Home">
+            <button>Go Home</button>
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
       <Footer />
     </div>
   );

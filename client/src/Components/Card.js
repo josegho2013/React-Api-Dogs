@@ -8,7 +8,7 @@ const Card = ({ image, name, temperaments, id, weight,life_span }) => {
       <img className="img" src={image} alt="" height="200px" width="200px" />
       <div className="info">
         <h2>{name}</h2>
-        <h3>I am</h3>
+        <h3>My temperament is : </h3>
         <div className="temp">
           {temperaments.map((t) => {
             return <li key={t.name}>{t.name}</li>;

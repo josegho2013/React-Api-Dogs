@@ -5,6 +5,7 @@ import Select from "react-select";
 import { createDogs } from "../Redux/actions/actions";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { FaDog } from "react-icons/fa";
 import "./Styles/Create.css";
 const { v4: uuidv4 } = require("uuid");
 
@@ -20,9 +21,9 @@ const validate = (input) => {
 const Create = () => {
   const dispatch = useDispatch();
   const temperament = useSelector(({ temperament }) => temperament);
+  const [created, setCreated] = useState(false);
   const [error, setError] = useState({
     name: "",
-  
   });
 
   const [input, setInput] = useState({
@@ -79,22 +80,22 @@ const Create = () => {
       image: input.image,
       temperaments: input.temperaments,
     };
-    if (!error.name ) {
+    if (!error.name) {
       e.preventDefault();
       dispatch(createDogs(newDog));
       setInput({
         name: "",
-        // image: "",
-        // temperaments: [],
-        // heightMin: "",
-        // heightMax: "",
-        // weightMin: "",
-        // weightMax: "",
-        // life_SpanMin: "",
-        // life_SpanMax: "",
+        image: "",
+        temperaments: [],
+        heightMin: "",
+        heightMax: "",
+        weightMin: "",
+        weightMax: "",
+        life_SpanMin: "",
+        life_SpanMax: "",
       });
 
-      alert("Dogs Create");
+      setCreated(true);
     } else {
       e.preventDefault();
       alert("Tienes campos vacios");
@@ -112,166 +113,166 @@ const Create = () => {
 
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
+      <Navbar />
       <div className="input">
         <h2>Create your new Dog</h2>
-
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="general">
-            <label>Name:</label>
-            <input
-              className="sub-input"
-              type="text"
-              name="name"
-              placeholder="Insert Dogs Name"
-              value={input.name}
-              onChange={(e) => handleChange(e)}
-              pattern="[a-zA-Z ]{3,15}"
-              required
-            />
-            {!error.name ? null : (
-              <span>
-                <p className="name_error_add">{error.name}</p>
-              </span>
-            )}
-          </div>
-          <div className="general">
-            <label>Height: </label>
-            <input
-              required
-              className="sub-input"
-              type="number"
-              name="heightMin"
-              placeholder="desde"
-              min="1"
-              max="30"
-              value={input.heightMin}
-              onChange={(e) => handleChange(e)}
-            />
-            <label> Cm</label>
+          <div className="form_1">
+            <div className="general">
+              <input
+                className="sub-input name"
+                type="text"
+                name="name"
+                placeholder="Insert Name"
+                value={input.name}
+                onChange={(e) => handleChange(e)}
+                pattern="[a-zA-Z ]{3,15}"
+                required
+              />
+              {!error.name ? null : (
+                <span>
+                  <p className="name_error_add">{error.name}</p>
+                </span>
+              )}
+            </div>
+            <div className="general">
+              <input
+                required
+                className="sub-input"
+                type="number"
+                name="heightMin"
+                placeholder="Height Min"
+                min="1"
+                max="30"
+                value={input.heightMin}
+                onChange={(e) => handleChange(e)}
+              />
 
-            <input
-              required
-              className="sub-input"
-              type="number"
-              name="heightMax"
-              placeholder="hasta"
-              min="5"
-              max="40"
-              value={input.heightMax}
-              onChange={(e) => handleChange(e)}
-            />
-            <label> Cm</label>
-          </div>
+              <input
+                required
+                className="sub-input"
+                type="number"
+                name="heightMax"
+                placeholder="Height Max"
+                min="5"
+                max="40"
+                value={input.heightMax}
+                onChange={(e) => handleChange(e)}
+              />
+              <label>Cm </label>
+            </div>
 
-          <div className="general">
-            <label> Weight: </label>
-            <input
-            required
-              className="sub-input"
-              type="number"
-              name="weightMin"
-              placeholder="weight"
-              min="1"
-              max="150"
-              value={input.weightMin}
-              onChange={(e) => handleChange(e)}
-            />
+            <div className="general">
+              <input
+                required
+                className="sub-input"
+                type="number"
+                name="weightMin"
+                placeholder="Weight Min"
+                min="1"
+                max="150"
+                value={input.weightMin}
+                onChange={(e) => handleChange(e)}
+              />
+              <input
+                required
+                className="sub-input"
+                type="number"
+                name="weightMax"
+                placeholder="Weight Max"
+                min="1"
+                max="150"
+                value={input.weightMax}
+                onChange={(e) => handleChange(e)}
+              />
+              <label>Kg </label>
+            </div>
+            <div className="general">
+              <input
+                required
+                placeholder="Life Span Min"
+                className="sub-input"
+                type="number"
+                name="life_spanMin"
+                min="1"
+                max="30"
+                value={input.life_spanMin}
+                onChange={(e) => handleChange(e)}
+              />
 
-            <label> Kg </label>
-            <input
-              required
-              className="sub-input"
-              type="number"
-              name="weightMax"
-              placeholder="weight"
-              min="1"
-              max="150"
-              value={input.weightMax}
-              onChange={(e) => handleChange(e)}
-            />
-
-            <label> Kg </label>
-          </div>
-          <div className="general">
-            <h4>Life_span</h4>
-
-            <input
-              required
-              className="sub-input"
-              type="number"
-              name="life_spanMin"
-              min="1"
-              max="30"
-              value={input.life_spanMin}
-              onChange={(e) => handleChange(e)}
-            />
-            <label>Años: </label>
-
-            <input
-              required
-              className="sub-input"
-              type="number"
-              name="life_spanMax"
-              min="1"
-              max="30"
-              value={input.life_spanMax}
-              onChange={(e) => handleChange(e)}
-            />
-            <label>Años: </label>
-          </div>
-
-          <div className="general">
-            <label>Imagen: </label>
-            <input
-              required
-              className="sub-input"
-              type="url"
-              name="image"
-              placeholder="Select image"
-              onChange={(e) => handleChange(e)}
-            />
+              <input
+                required
+                placeholder="Life Span Max"
+                className="sub-input"
+                type="number"
+                name="life_spanMax"
+                min="1"
+                max="30"
+                value={input.life_spanMax}
+                onChange={(e) => handleChange(e)}
+              />
+              <label>Years</label>
+            </div>
+            <div className="general name">
+              <Select
+                placeholder="Select Temperaments.."
+                required
+                className="temper"
+                onChange={(e) => handleSelect(e)}
+                defaultValue={"All"}
+                isMulti
+                options={prueba}
+                closeMenuOnSelect={false}
+              />
+            </div>
           </div>
 
-          <div className="general">
-            <h4>Temperament: </h4>
-            <Select
-              required
-              className="temper"
-              onChange={(e) => handleSelect(e)}
-              defaultValue={"All"}
-              isMulti
-              options={prueba}
-              closeMenuOnSelect={false}
-              styles={{
-                borderBotton: "1px dotted blue",
-                borderRadius: "200px",
-              }}
-            />
+          <div className="form_2">
+            <div className="image">
+              <input
+                required
+                className="sub-input"
+                type="url"
+                name="image"
+                placeholder="Insert Image URL"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <button type="submit">Create</button>
           </div>
-          {/* <select>
-          {temperament.map((t) => {
-            <option default>All</option>;
-            return (
-              <option key={t.id} value={t.name}>
-                {t.name}
-              </option>
-            );
-          })}
-        </select> */}
-
-          <button type="submit">Create</button>
-          <Link to="/home">
-            <button>Delete</button>
-          </Link>
         </form>
       </div>
-      <div>
-        <Footer />
-      </div>
+      {created ? (
+        <div className="popUp" transition={{ duration: 0.2 }}>
+          <h1>
+            <FaDog size="5rem" />
+            GOOD <br />
+            JOB
+          </h1>
+
+          <p>Your dog was created successfully!</p>
+          <Link to="/Home">
+            <button>Go Home</button>
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
+      <Footer />
     </div>
   );
 };
 export default Create;
+
+
+  /* <select>
+  {temperament.map((t) => {
+    <option default>All</option>;
+    return (
+      <option key={t.id} value={t.name}>
+        {t.name}
+      </option>
+    );
+  })}
+  </select> */
+

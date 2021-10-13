@@ -7,6 +7,7 @@ export const GET_TEMPERAMENT = " GET_TEMPERAMENT";
 export const ADD_DOGS = " ADD_DOGS";
 export const SEARCH_BY_ID = "SEARCH_BY_ID";
 export const SEARCH_BY_NAME = " SEARCH_BY_NAME";
+export const DOG_DELETE = " DOG_DELETE";
 export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT";
 export const GET_ORDER_ASC = "GET_ORDER_ASC";
 export const GET_ORDER_DESC = "GET_ORDER_DESC";
@@ -14,8 +15,8 @@ export const GET_HEIGHT_LOW = " GET_HEIGHT_LOW";
 export const GET_HEIGHT_HIGH = " GET_HEIGHT_HIGH";
 export const GET_WEIGH_LIGHTER = " GET_WEIGH_LIGHTER";
 export const GET_WEIGH_HIGHEST = " GET_WEIGH_HIGHEST";
-export const GET_YEARMENOR = " GET_YEARMENOR";
-export const GET_YEARMAYOR = " GET_YEARMAYOR";
+export const GET_HEIGHT_LIGHTER = " GET_HEIGHT_LIGHTER";
+export const GET_HEIGHT_HIGHEST = " GET_HEIGHT_HIGHEST";
 
 export function getAllDogs() {
   return async (dispatch) => {
@@ -59,6 +60,13 @@ export const createDogs = (payload) => {
   };
 };
 
+export const dogDelete = (id) => {
+  return async (dispatch) => {
+    await axios.delete(`dogs/dogDelete/${id}`);
+    dispatch({ type: DOG_DELETE, payload: id });
+  };
+};
+
 export const getTemperament = () => {
   return async (dispatch) => {
     const { data } = await axios.get(`/temperaments`);
@@ -83,19 +91,6 @@ export const filterOrderDes = (payload) => {
   };
 };
 
-// export const filterByHeightLow = (payload) => {
-//   return (dispatch) => {
-//     dispatch({ type:GET_HEIGHT_LOW , payload: payload });
-
-//   };
-// };
-
-// export const filterByHeightHigh = (payload) => {
-//   return (dispatch) => {
-//     dispatch({ type:GET_HEIGHT_HIGH , payload: payload });
-//   };
-// };
-
 export const filterByWeighLighter = (payload) => {
   return (dispatch) => {
     dispatch({ type: GET_WEIGH_LIGHTER, payload: payload });
@@ -108,14 +103,14 @@ export const filterByWeightHighest = (payload) => {
   };
 };
 
-export const filterYearMenor = (payload) => {
+export const filterByHeightLow = (payload) => {
   return (dispatch) => {
-    dispatch({ type: GET_YEARMENOR, payload });
+    dispatch({ type: GET_HEIGHT_LIGHTER, payload });
   };
 };
 
-export const filterYearMayor = (payload) => {
+export const filterByHeightHigh = (payload) => {
   return (dispatch) => {
-    dispatch({ type: GET_YEARMAYOR, payload });
+    dispatch({ type: GET_HEIGHT_HIGHEST, payload });
   };
 };

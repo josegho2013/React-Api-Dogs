@@ -1,3 +1,8 @@
+.home{
+  min-height: 420px;
+}
+
+
 .dogs {
   display: grid;
   grid: auto-flow / 1fr 1fr;
