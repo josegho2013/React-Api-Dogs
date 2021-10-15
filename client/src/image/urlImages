@@ -17,6 +17,11 @@ https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPvLNK-sVUpX2uVlVvbm3eBJ0v
 
 
 
+
+
+
+
+
 export function getAllDogs(){
     return function(dispatch){
         return axios.get(rutataaa)

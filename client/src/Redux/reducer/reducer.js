@@ -80,7 +80,10 @@ function RootReducer(state = initialState, action) {
 
       return {
         ...state,
-        requestDogs: imageUrl.length > 0 ? imageUrl : action.payload,
+        // requestDogs: state.dogsAll.filter((b)=> {
+        //   return  Number(b.life_span[0] + b.life_span[1]) < action.payload
+        // }),
+         requestDogs: imageUrl.length > 0 ? imageUrl : action.payload,
       };
 
     case FILTER_BY_TEMPERAMENT:

@@ -26,7 +26,7 @@ async function getAllDogs(req, res, next) {
     });
 
     let dataBase = await Dog.findAll({
-      attributes: ["id", "name", "height", "weight", "life_span", "image"],
+      attributes: ["id", "name", "weight", "life_span", "image"],
       include: [
         {
           attributes: ["name"],
@@ -80,7 +80,6 @@ async function getDogsDb(req, res, next) {
       attributes: [
         "id",
         "name",
-        "height",
         "weight",
         "life_span",
         "image",
@@ -117,7 +116,7 @@ async function searchByName(req, res, next) {
       where: {
         name: { [Op.like]: `%${search}%` },
       },
-      attributes: ["id", "name", "height", "weight", "life_span", "image"],
+      attributes: ["id", "name", "weight", "life_span", "image"],
       include: [
         {
           model: Temperaments,
@@ -197,7 +196,6 @@ async function createDogs(req, res) {
       id: uuidv4(),
       name,
       weight,
-      height,
       life_span,
       image,
     });

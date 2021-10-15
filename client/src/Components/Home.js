@@ -14,11 +14,11 @@ const Home = () => {
   // paginacion
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-  // Paso 1
+  
   const indexOfLastDogs = currentPage * dogsPerPage;
   const indexOfFirsDogs = indexOfLastDogs - dogsPerPage;
   const dogspage = requestDogs?.slice(indexOfFirsDogs, indexOfLastDogs);
-  // Actualizaciòn
+  
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (

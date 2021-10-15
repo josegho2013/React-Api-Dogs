@@ -48,7 +48,7 @@ export const searchById = (id) => {
 
 export const searchByName = (payload) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`/dogs/search?q=${payload}`);
+     const { data } = await axios.get(`/dogs/search?q=${payload}`);
     dispatch({ type: SEARCH_BY_NAME, payload: data });
   };
 };

@@ -221,7 +221,7 @@ const Create = () => {
                 onChange={(e) => handleSelect(e)}
               >
                 {temperament.map((t) => {
-                  return <option>{t.name}</option>;
+                  return <option key={t.id}>{t.name}</option>;
                 })}
               </select>
               <div className="equis_1">
