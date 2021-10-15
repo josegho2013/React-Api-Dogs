@@ -5,7 +5,7 @@ const { API_KEY } = process.env;
 async function getTemperament(req, res, next) {
   try {
     const apiUrl = await axios.get(
-      `https://api.thedogapi.com/v1/breeds?page_size=5&key=${API_KEY}`
+      `https://api.thedogapi.com/v1/breeds?key=${API_KEY}`
     );
 
     apiUrl.data.forEach((item) => {

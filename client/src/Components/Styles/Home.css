@@ -21,3 +21,9 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.noSearch{
+  display: block;
+  max-width: 400px;
+  margin: auto;
+  grid: none;
+}

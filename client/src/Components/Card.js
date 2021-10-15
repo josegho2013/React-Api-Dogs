@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Styles/Card.css";
 
-const Card = ({ image, name, temperaments, id, weight,life_span }) => {
+const Card = ({ image, name, temperaments, id, weight, life_span }) => {
   return (
     <div className="card">
       <img className="img" src={image} alt="" height="200px" width="200px" />
@@ -14,10 +14,11 @@ const Card = ({ image, name, temperaments, id, weight,life_span }) => {
             return <li key={t.name}>{t.name}</li>;
           })}
         </div>
-        <h4>años de vida= {life_span}</h4>
-        <h5>weight: {weight} kg</h5>
+        <h5>Weight: {weight} kg</h5>
+        <h5>Life Span: {life_span}</h5>
+
         <Link to={`/CardDetail/${id}`}>
-          <button>Ver mas</button>
+          <button className="btn_card">Ver mas</button>
         </Link>
       </div>
     </div>

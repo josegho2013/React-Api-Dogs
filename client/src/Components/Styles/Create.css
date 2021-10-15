@@ -31,7 +31,13 @@
 .name {
   width: 310px;
 }
-
+.selectTemp {
+  display: flex;
+}
+.selected {
+  display: block;
+  margin: 0 2px;
+}
 input:valid {
   background-color: #f5f8f5;
 }
@@ -48,21 +54,27 @@ input:required:invalid {
 }
 .temper {
   text-align: justify;
+  cursor: pointer;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #999;
+  border: 2px solid cadetblue;
 }
 
 .form_1 {
   display: block;
-  width: 60%;
+  width: 55%;
 }
 .form_2 {
   display: block;
-  width: 40%;
+  width: 45%;
   text-align-last: end;
 }
 .image {
   display: block;
   margin: auto;
-  height: 270px;
+  height: 330px;
   background-image: url("../../image/photo_3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -132,4 +144,20 @@ input:required:invalid {
 }
 .popUp a {
   margin-left: 80%;
+}
+.equis_1{
+  width: 50%;
+  margin: auto;
+}
+.equis{
+  cursor: pointer;
+  background-color: cadetblue;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: white;
+  max-height: 22px;
+  padding: 5px !important;
+  margin: 0 !important;
+  line-height: 0;
+  font-size: 0.5rem !important;
 }

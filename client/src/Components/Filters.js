@@ -11,14 +11,13 @@ import {
   filterOrderDes,
   filterByWeighLighter,
   filterByWeightHighest,
-  filterByHeightLow,
-  filterByHeightHigh,
+  filterLifeSpanMenor,
+  filterLifeSpanMayor,
 } from "../Redux/actions/actions";
 
 const Filters = () => {
   const dispatch = useDispatch();
   const temperament = useSelector(({ temperament }) => temperament);
-  const dogsAll = useSelector(({ dogsAll }) => dogsAll);
 
   useEffect(() => {
     dispatch(getTemperament());
@@ -29,31 +28,38 @@ const Filters = () => {
   };
 
   const handleOrder = (e) => {
-    if (e.target.value === "Ascendente") {
+    if (e.target.value === "Ascendent") {
       dispatch(filterOrderAsc(e.target.value));
-    } else {
+    } else if(e.target.value === "Descendent"){
       dispatch(filterOrderDes(e.target.value));
+    } else {
+      dispatch(getAllDogs());
     }
   };
 
   const handleWeight = (e) => {
-    if (e.target.value === "menor") {
+    if (e.target.value === "Lighter") {
       dispatch(filterByWeighLighter(e.target.value));
-    } else {
+    } else if(e.target.value === "Heavier"){
       dispatch(filterByWeightHighest(e.target.value));
+    } else {
+      dispatch(getAllDogs());
     }
   };
-  const handleHeight = (e) => {
-    if (e.target.value === "menor") {
-      dispatch(filterByHeightLow());
+  
+  const handleLifeSpan = (e) => {
+    if (e.target.value === "Young") {
+      dispatch(filterLifeSpanMenor(e.target.value));
+    } else if(e.target.value === "Old"){
+      dispatch(filterLifeSpanMayor(e.target.value));
     } else {
-      dispatch(filterByHeightHigh());
+      dispatch(getAllDogs());
     }
   };
   const handleDog = (e) => {
-    if (e.target.value === "Originales") {
+    if (e.target.value === "Originals") {
       dispatch(getDogsApi());
-    } else if (e.target.value === "Creados") {
+    } else if (e.target.value === "Customs") {
       dispatch(getDogsDb());
     } else {
       dispatch(getAllDogs());
@@ -78,44 +84,36 @@ const Filters = () => {
         <p>Dogs</p>
         <select onChange={(e) => handleDog(e)}>
           <option default>All</option>
-          <option>Originales</option>
-          <option>Creados</option>
+          <option>Originals</option>
+          <option>Customs</option>
         </select>
       </div>
 
       <div>
         <p>Order</p>
-
         <select onChange={(e) => handleOrder(e)}>
           <option default>All</option>
-          <option>Ascendente</option>
-          <option>Descendente</option>
+          <option>Ascendent</option>
+          <option>Descendent</option>
         </select>
       </div>
-
-      {/* <div>Filter By Heigh </div>
-      <select onChange={(e) => handleHeigh(e)}>
-        <option default>All</option>
-        <option >Lower</option>
-        <option>High</option>
-      </select> */}
 
       <div>
         <p>Weight</p>
-
         <select onChange={(e) => handleWeight(e)}>
           <option default>All</option>
-          <option>menor</option>
-          <option>mayor</option>
+          <option>Lighter</option>
+          <option>Heavier</option>
         </select>
       </div>
       <div>
+        
         <div>
-          <p>Height</p>
-          <select onChange={(e) => handleHeight(e)}>
+          <p>Life Span:</p>
+          <select onChange={(e) => handleLifeSpan(e)}>
             <option default>All</option>
-            <option>menor</option>
-            <option>mayor</option>
+            <option>Young</option>
+            <option>Old</option>
           </select>
         </div>
       </div>

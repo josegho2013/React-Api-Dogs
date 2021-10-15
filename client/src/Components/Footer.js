@@ -1,5 +1,5 @@
 import React from "react";
-// import { GiGecko } from "react-icons/gi";
+
 import { FaDog } from "react-icons/fa";
 import "./Styles/Footer.css";
 

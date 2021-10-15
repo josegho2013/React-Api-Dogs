@@ -15,8 +15,8 @@ export const GET_HEIGHT_LOW = " GET_HEIGHT_LOW";
 export const GET_HEIGHT_HIGH = " GET_HEIGHT_HIGH";
 export const GET_WEIGH_LIGHTER = " GET_WEIGH_LIGHTER";
 export const GET_WEIGH_HIGHEST = " GET_WEIGH_HIGHEST";
-export const GET_HEIGHT_LIGHTER = " GET_HEIGHT_LIGHTER";
-export const GET_HEIGHT_HIGHEST = " GET_HEIGHT_HIGHEST";
+export const GET_LIFE_MENOR = " GET_LIFE_MENOR";
+export const GET_LIFE_MAYOR = " GET_LIFE_MAYOR ";
 
 export function getAllDogs() {
   return async (dispatch) => {
@@ -103,14 +103,15 @@ export const filterByWeightHighest = (payload) => {
   };
 };
 
-export const filterByHeightLow = (payload) => {
+
+export const filterLifeSpanMenor = (payload) => {
   return (dispatch) => {
-    dispatch({ type: GET_HEIGHT_LIGHTER, payload });
+    dispatch({ type: GET_LIFE_MENOR, payload });
   };
 };
 
-export const filterByHeightHigh = (payload) => {
+export const filterLifeSpanMayor= (payload) => {
   return (dispatch) => {
-    dispatch({ type: GET_HEIGHT_HIGHEST, payload });
+    dispatch({ type:  GET_LIFE_MAYOR, payload });
   };
 };

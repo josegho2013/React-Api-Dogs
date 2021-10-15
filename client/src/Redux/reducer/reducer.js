@@ -12,8 +12,8 @@ import {
   GET_ORDER_DESC,
   GET_WEIGH_LIGHTER,
   GET_WEIGH_HIGHEST,
-  GET_HEIGHT_LIGHTER,
-  GET_HEIGHT_HIGHEST,
+  GET_LIFE_MENOR,
+  GET_LIFE_MAYOR,
 } from "../actions/actions";
 
 const initialState = {
@@ -23,8 +23,6 @@ const initialState = {
   searchById: [],
   requestDogs: [],
   dogDelete: false,
-  notFound: false,
-  setPage: Number,
 };
 function RootReducer(state = initialState, action) {
   switch (action.type) {
@@ -83,8 +81,6 @@ function RootReducer(state = initialState, action) {
       return {
         ...state,
         requestDogs: imageUrl.length > 0 ? imageUrl : action.payload,
-        notFound: imageUrl.length > 0 ? false : true,
-        setPage: 1,
       };
 
     case FILTER_BY_TEMPERAMENT:
@@ -92,7 +88,6 @@ function RootReducer(state = initialState, action) {
         return {
           ...state,
           requestDogs: state.dogsAll,
-          setPage: 1,
         };
       } else {
         return {
@@ -103,14 +98,13 @@ function RootReducer(state = initialState, action) {
             });
             return prueba;
           }),
-          setPage: 1,
         };
       }
 
     case GET_ORDER_DESC:
     case GET_ORDER_ASC:
       const ascDescFilter =
-        action.payload === "Ascendente" || action.payload === "All"
+        action.payload === "Ascendent" || action.payload === "All"
           ? state.dogsAll.sort((a, b) => {
               if (a.name > b.name) {
                 return 1;
@@ -128,7 +122,6 @@ function RootReducer(state = initialState, action) {
       return {
         ...state,
         requestDogs: [...ascDescFilter],
-        setPage: 1,
       };
 
     case GET_WEIGH_LIGHTER:
@@ -137,12 +130,11 @@ function RootReducer(state = initialState, action) {
         return !i.weight.includes("NaN");
       });
       const orderWeigh =
-        action.payload === "menor"
+        action.payload === "Lighter"
           ? filtered.sort((a, b) => {
               if (
-                Number(
-                  a.weight.split(" - ")[0] > Number(b.weight.split(" - ")[0])
-                )
+                Number(a.weight.split(" - ")[0]) >
+                Number(b.weight.split(" - ")[0])
               ) {
                 return 1;
               } else {
@@ -162,42 +154,36 @@ function RootReducer(state = initialState, action) {
       return {
         ...state,
         requestDogs: [...orderWeigh],
-        setPage: 1,
       };
-    
-      case GET_HEIGHT_LIGHTER:
-        case GET_HEIGHT_HIGHEST:
-          // const filtere = state.dogsAll.filter((i) => {
-          //   return !i.Height.includes("NaN");
-          // });
-          const orderHeigh =
-            action.payload === "mayor"
-              ? state.dogsAll.sort((a, b) => {
-                  if (
-                    Number(
-                      a.height.split(" - ")[0] > Number(b.height.split(" - ")[0])
-                    )
-                  ) {
-                    return 1;
-                  } else {
-                    return -1;
-                  }
-                })
-              : state.dogsAll.sort((a, b) => {
-                  if (
-                    Number(a.height.split(" - ")[0]) <
-                    Number(b.height.split(" - ")[0])
-                  ) {
-                    return 1;
-                  } else {
-                    return -1;
-                  }
-                });
-          return {
-            ...state,
-            requestDogs: [...orderHeigh],
-            
-          };
+
+    case GET_LIFE_MENOR:
+    case GET_LIFE_MAYOR:
+      const orderLifeSpan =
+        action.payload === "Young"
+          ? state.dogsAll.sort((a, b) => {
+              if (
+                Number(a.life_span[0] + a.life_span[1]) >
+                Number(b.life_span[0] + b.life_span[1])
+              ) {
+                return 1;
+              } else {
+                return -1;
+              }
+            })
+          : state.dogsAll.sort((a, b) => {
+              if (
+                Number(a.life_span[0] + a.life_span[1]) <
+                Number(b.life_span[0] + b.life_span[1])
+              ) {
+                return 1;
+              } else {
+                return -1;
+              }
+            });
+      return {
+        ...state,
+        requestDogs: [...orderLifeSpan],
+      };
     default:
       return state;
   }

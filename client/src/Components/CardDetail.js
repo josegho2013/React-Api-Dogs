@@ -5,20 +5,25 @@ import { searchById, dogDelete } from "../Redux/actions/actions";
 import Navbar from "./Navbar";
 import { FaDog } from "react-icons/fa";
 import Footer from "./Footer";
+import { getAllDogs } from "../Redux/actions/actions";
+
 import "./Styles/Detail.css";
 
 const CardDetail = ({ id }) => {
   const dispatch = useDispatch();
   const searchId = useSelector(({ searchById }) => searchById);
   const [deleted, setDeleted] = useState(false);
+  
   useEffect(() => {
     dispatch(searchById(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const handleDelete = (id) => {
     dispatch(dogDelete(id));
     setDeleted(true);
+  };
+  const reset = () => {
+    dispatch(getAllDogs());
   };
 
   return (
@@ -42,9 +47,12 @@ const CardDetail = ({ id }) => {
               )}
 
               <p>Life Span: {searchId?.life_span} Años</p>
+
               <h3>Temperaments</h3>
               {typeof searchId?.temperaments === "string" ? (
-                <li>{searchId?.temperaments}</li>
+                <div className="temp">
+                  <li>{searchId?.temperaments}</li>
+                </div>
               ) : (
                 <div className="temp">
                   {searchId?.temperaments?.map((a) => {
@@ -64,9 +72,10 @@ const CardDetail = ({ id }) => {
           ) : (
             <></>
           )}
-
-          <Link to="/Home">
-            <button>Go Home</button>
+          <Link to="/home">
+            <button onClick={() => reset()} className="button">
+              Go Home
+            </button>
           </Link>
         </div>
       </div>
@@ -78,9 +87,11 @@ const CardDetail = ({ id }) => {
             JOB
           </h1>
 
-          <p>your dog has been successfully eliminated!</p>
-          <Link to="/Home">
-            <button>Go Home</button>
+          <p>Your dog has been successfully eliminated!</p>
+          <Link to="/home">
+            <button onClick={() => reset()} className="button">
+              Go Home
+            </button>
           </Link>
         </div>
       ) : (

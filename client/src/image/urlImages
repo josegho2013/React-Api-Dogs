@@ -11,3 +11,18 @@ https://cdn.wamiz.fr/article/images/ES%20PHOTOS/ABRIL2020/perro-proteccion-gafas
 https://cdn.shopify.com/s/files/1/1566/2889/files/perro_2.jpg?v=1588265489
 https://tvyfarandula.com/wp-content/uploads/2020/07/Perros-graciosos-fotos-momento-preciso-www.laguiadelvaron-20.jpg
 https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPvLNK-sVUpX2uVlVvbm3eBJ0vMRWMI-lT0w&usqp=CAU
+
+
+
+
+
+
+export function getAllDogs(){
+    return function(dispatch){
+        return axios.get(rutataaa)
+        .then (res=>{
+            console.log(tal cosa)
+             dispatch({ type: GET_All_DOGS, payload:res.data });
+        })
+    }
+}

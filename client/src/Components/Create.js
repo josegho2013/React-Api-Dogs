@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import { createDogs } from "../Redux/actions/actions";
+import { createDogs, getAllDogs } from "../Redux/actions/actions";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { FaDog } from "react-icons/fa";
@@ -39,13 +38,6 @@ const Create = () => {
       url: "",
     },
     temperaments: [],
-  });
-
-  const prueba = temperament.map((t) => {
-    return {
-      value: t.name,
-      label: t.name,
-    };
   });
 
   function handleChange(e) {
@@ -98,18 +90,26 @@ const Create = () => {
       setCreated(true);
     } else {
       e.preventDefault();
-      alert("Tienes campos vacios");
+      alert("You have empty input`s!");
     }
   }
 
   function handleSelect(e) {
     setInput({
       ...input,
-      temperaments: e.map((i) => {
-        return i.value;
-      }),
+      temperaments: [...input.temperaments, e.target.value],
     });
   }
+  function deselectTemp(t) {
+    setInput({
+      ...input,
+      temperaments: input.temperaments.filter((temp) => temp !== t),
+    });
+  }
+
+  const reset = () => {
+    dispatch(getAllDogs());
+  };
 
   return (
     <div>
@@ -124,7 +124,7 @@ const Create = () => {
                 type="text"
                 name="name"
                 placeholder="Insert Name"
-                value={input.name}
+                value={input.name || ""}
                 onChange={(e) => handleChange(e)}
                 pattern="[a-zA-Z ]{3,15}"
                 required
@@ -143,8 +143,8 @@ const Create = () => {
                 name="heightMin"
                 placeholder="Height Min"
                 min="1"
-                max="30"
-                value={input.heightMin}
+                max="60"
+                value={input.heightMin || ""}
                 onChange={(e) => handleChange(e)}
               />
 
@@ -155,13 +155,12 @@ const Create = () => {
                 name="heightMax"
                 placeholder="Height Max"
                 min="5"
-                max="40"
-                value={input.heightMax}
+                max="80"
+                value={input.heightMax || ""}
                 onChange={(e) => handleChange(e)}
               />
               <label>Cm </label>
             </div>
-
             <div className="general">
               <input
                 required
@@ -170,8 +169,8 @@ const Create = () => {
                 name="weightMin"
                 placeholder="Weight Min"
                 min="1"
-                max="150"
-                value={input.weightMin}
+                max="100"
+                value={input.weightMin || ""}
                 onChange={(e) => handleChange(e)}
               />
               <input
@@ -181,8 +180,8 @@ const Create = () => {
                 name="weightMax"
                 placeholder="Weight Max"
                 min="1"
-                max="150"
-                value={input.weightMax}
+                max="100"
+                value={input.weightMax || ""}
                 onChange={(e) => handleChange(e)}
               />
               <label>Kg </label>
@@ -196,7 +195,7 @@ const Create = () => {
                 name="life_spanMin"
                 min="1"
                 max="30"
-                value={input.life_spanMin}
+                value={input.life_spanMin || ""}
                 onChange={(e) => handleChange(e)}
               />
 
@@ -208,22 +207,38 @@ const Create = () => {
                 name="life_spanMax"
                 min="1"
                 max="30"
-                value={input.life_spanMax}
+                value={input.life_spanMax || ""}
                 onChange={(e) => handleChange(e)}
               />
               <label>Years</label>
             </div>
-            <div className="general name">
-              <Select
-                placeholder="Select Temperaments.."
-                required
-                className="temper"
+            Temperaments...
+            <div className="general selectTemp">
+              {/* Opciones */}
+              <select
+                className="sub-input temper"
+                multiple={true}
                 onChange={(e) => handleSelect(e)}
-                defaultValue={"All"}
-                isMulti
-                options={prueba}
-                closeMenuOnSelect={false}
-              />
+              >
+                {temperament.map((t) => {
+                  return <option>{t.name}</option>;
+                })}
+              </select>
+              <div className="equis_1">
+                {/* Seleccionadas */}
+                {input.temperaments.map((t) => {
+                  return (
+                    <div style={{ display: "flex", margin: "5px 0" }}>
+                      <button className="equis" onClick={() => deselectTemp(t)}>
+                        X
+                      </button>
+                      <p key={t} className="selected">
+                        {t}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -251,8 +266,10 @@ const Create = () => {
           </h1>
 
           <p>Your dog was created successfully!</p>
-          <Link to="/Home">
-            <button>Go Home</button>
+          <Link to="/home">
+            <button onClick={() => reset()} className="button">
+              Go Home
+            </button>
           </Link>
         </div>
       ) : (
@@ -263,16 +280,3 @@ const Create = () => {
   );
 };
 export default Create;
-
-
-  /* <select>
-  {temperament.map((t) => {
-    <option default>All</option>;
-    return (
-      <option key={t.id} value={t.name}>
-        {t.name}
-      </option>
-    );
-  })}
-  </select> */
-

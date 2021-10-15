@@ -18,6 +18,11 @@
   background-size: cover; */
 
 }
+.btn_card{
+  border-radius: 10px;
+  /* background-color: cadetblue; */
+  border: 2px solid cadetblue
+}
 
 .img {
   justify-content: center;
@@ -36,7 +41,7 @@
 }
 .card:hover {
   transform: scale(1.07);
-  background-color: greenyellow;
+  background-color: rgba(217, 255, 47, 0.685);
   color: black;
 }
 

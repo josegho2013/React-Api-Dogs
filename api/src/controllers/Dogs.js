@@ -49,7 +49,7 @@ async function getAllDogs(req, res, next) {
 async function getDogsApi(req, res, next) {
   try {
     const apiUrl = await axios.get(
-      `https://api.thedogapi.com/v1/breeds?limit=12${API_KEY}`
+      `https://api.thedogapi.com/v1/breeds?${API_KEY}`
     );
 
     let apiInfo = await apiUrl.data.map((el) => {
@@ -77,7 +77,14 @@ async function getDogsApi(req, res, next) {
 async function getDogsDb(req, res, next) {
   try {
     let dataBase = await Dog.findAll({
-      attributes: ["id", "name", "height", "weight", "life_span", "image"],
+      attributes: [
+        "id",
+        "name",
+        "height",
+        "weight",
+        "life_span",
+        "image",
+      ],
       include: [
         {
           model: Temperaments,
@@ -95,7 +102,7 @@ async function getDogsDb(req, res, next) {
 }
 
 async function searchByName(req, res, next) {
-  const search = req.query.q; 
+  const search = req.query.q;
 
   try {
     const apiUrl = await axios.get(
@@ -144,7 +151,6 @@ async function getDogById(req, res, next) {
         ],
       });
 
-      // dogId.dog.dataValues["dataBase"] = true;
       return res.status(200).json(dogId);
     } catch (error) {
       next(error);
@@ -174,9 +180,6 @@ async function getDogById(req, res, next) {
         life_span: data.life_span,
         image: element,
         temperaments: data.temperament,
-        bred_for: data.bred_for,
-        breed_group: data.breed_group,
-        origin: data.origin,
       };
       return res.status(200).json(dogs);
     } catch (error) {
@@ -186,7 +189,8 @@ async function getDogById(req, res, next) {
 }
 
 async function createDogs(req, res) {
-  let { name, weight, height, life_span, image, temperaments } = req.body;
+  let { name, weight, height, life_span, image, temperaments } =
+    req.body;
 
   try {
     let dogCreated = await Dog.create({
@@ -197,6 +201,7 @@ async function createDogs(req, res) {
       life_span,
       image,
     });
+
     if (temperaments.length > 0) {
       temperaments.forEach(async (temp) => {
         try {
@@ -221,7 +226,7 @@ async function dogDelete(req, res, next) {
 
   if (id.includes("-")) {
     try {
-      const dogId = await Dog.destroy( {
+      const dogId = await Dog.destroy({
         where: { id },
       });
 

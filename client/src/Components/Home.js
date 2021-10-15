@@ -1,7 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllDogs } from "../Redux/actions/actions";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { FaDog } from "react-icons/fa";
 import Filters from "./Filters";
 import Pagination from "./Pagination";
 import Card from "./Card";
@@ -9,26 +9,20 @@ import Card from "./Card";
 import "./Styles/Home.css";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const requestDogs = useSelector(({ requestDogs }) => requestDogs);
-  // sconst setPage = useSelector(({ setPage }) => setPage);
 
   // paginacion
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-
+  // Paso 1
   const indexOfLastDogs = currentPage * dogsPerPage;
   const indexOfFirsDogs = indexOfLastDogs - dogsPerPage;
   const dogspage = requestDogs?.slice(indexOfFirsDogs, indexOfLastDogs);
-
+  // Actualizaciòn
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  useEffect(() => {
-    dispatch(getAllDogs());
-  }, [dispatch]);
-
   return (
-    <div className= "home">
+    <div className="home">
       <div className="line_dog" />
       <Filters />
       <hr className="line"></hr>
@@ -46,12 +40,24 @@ const Home = () => {
                 name={po.name}
                 temperaments={po.temperaments}
                 weight={po.weight}
+                height={po.height}
                 life_span={po.life_span}
               />
             );
           })
         ) : (
           <div>Loading...</div>
+        )}
+        {dogspage.length === 0 ? (
+          <div className="noSearch">
+            <h1>
+              <FaDog size="5rem" />
+              UPSSSSSS!
+            </h1>
+            <p>No se encontro lo que buscabas!</p>
+          </div>
+        ) : (
+          <></>
         )}
       </div>
       <Pagination
