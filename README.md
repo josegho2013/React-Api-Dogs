@@ -1,12 +1,12 @@
 
 
  ## Api Dogs
+<img height="100px" src="client/src/image/dog_a.png"/>
 
+<img height="100px" src="client/src/image/dog.png" />
 
-
-
-
-- Construir una App utlizando React, Redux, Node y Sequelize.
+-
+ Construir una App utlizando React, Redux, Node y Sequelize.
 
 ## Enunciado
 
