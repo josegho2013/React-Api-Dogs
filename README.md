@@ -6,20 +6,23 @@
 -Construir una App utlizando React, Redux, Node y Sequelize.
 
 
-# Home <img height="300px" src="client/src/image/hover.jpeg" align="center"/>
+# Home 
+<img height="300px" src="client/src/image/hover.jpeg" align="center"/>
  
  <img height="20px" src="client/src/image/pawprint.png" align="center"/>
 
 <img height="300px" src="client/src/image/principal.jpeg" align="center"/>
 <img height="20px" src="client/src/image/pawprint.png" align="center"/>
 
-# Form <img height="300px" src="client/src/image/form.jpeg" align="center"/>
+# Form 
+<img height="300px" src="client/src/image/form.jpeg" align="center"/>
 <img height="20px" src="client/src/image/pawprint.png" align="center"/>
 
 <img height="300px" src="client/src/image/creado.jpeg" align="center"/>
 <img height="20px" src="client/src/image/pawprint.png" align="center"/>
 
-# Pagination <img height="300px" src="client/src/image/paginacion.jpeg" align="center"/>
+# Pagination
+ <img height="300px" src="client/src/image/paginacion.jpeg" align="center"/>
 <img height="20px" src="client/src/image/pawprint.png" align="center"/>
 
 <img height="300px" src="client/src/image/detalle.jpeg" align="center"/>
