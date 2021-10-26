@@ -1,6 +1,10 @@
 
 
-## Objetivos del Proyecto
+ ## Api Dogs
+
+
+
+
 
 - Construir una App utlizando React, Redux, Node y Sequelize.
 
