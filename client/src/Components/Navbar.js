@@ -13,9 +13,9 @@ const NavBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(searchByName(search));
-    if (search) {
-      setSearch("");
-    }
+    // if (search) {
+    //   setSearch("");
+    // }
   };
 
   const reset = () => {

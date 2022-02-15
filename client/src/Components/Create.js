@@ -99,6 +99,7 @@ const Create = () => {
       ...input,
       temperaments: [...input.temperaments, e.target.value],
     });
+    
   }
   function deselectTemp(t) {
     setInput({

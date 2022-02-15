@@ -14,7 +14,7 @@ const Card = ({ image, name, temperaments, id, weight, life_span }) => {
             return <li key={t.name}>{t.name}</li>;
           })}
         </div>
-        <h5>Weight: {weight} kg</h5>
+        <h5>Weight: {name} kg</h5>
         <h5>Life Span: {life_span}</h5>
 
         <Link to={`/CardDetail/${id}`}>
