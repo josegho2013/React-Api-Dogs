@@ -14,9 +14,19 @@ const Landing = () => {
 
   return (
     <div className="landing">
-      <Link to="/home">
-        <button className="button">Welcome</button>
-      </Link>
+      <div className="landing1">
+        <div className="images">
+          <div className="img1" />
+          <div className="img2" />
+          <div className="img3" />
+          <div className="img4" />
+        </div>
+        <p>REACT API DOGS</p>
+        <Link to="/home">
+          <button>Welcome</button>
+        </Link>
+      </div>
+      <div className="landing2"></div>
     </div>
   );
 };

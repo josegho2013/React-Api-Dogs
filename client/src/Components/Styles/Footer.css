@@ -5,8 +5,9 @@
   height: 70px;
   justify-content: space-between;
   align-items: center;
-  background-color: cadetblue;
   font-family: "Urbanist";
+  background-position: center;
+  background-color: #fbd02c;
 }
 .footer_container h1 {
   display: flex;

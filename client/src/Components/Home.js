@@ -14,18 +14,18 @@ const Home = () => {
   // paginacion
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-  
+
   const indexOfLastDogs = currentPage * dogsPerPage;
   const indexOfFirsDogs = indexOfLastDogs - dogsPerPage;
   const dogspage = requestDogs?.slice(indexOfFirsDogs, indexOfLastDogs);
-  
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="home">
-      <div className="line_dog" />
+    <div className={dogspage.length > 4 ? "home" : "home2"}>
+      {/* <div className="line_dog" /> */}
       <Filters />
-      <hr className="line"></hr>
+      {/* <hr className="line"></hr> */}
       <div className="dogs">
         {dogspage ? (
           dogspage.map((po) => {

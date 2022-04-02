@@ -3,8 +3,6 @@
   column-span: 2;
   padding: 6% 18%;
   text-align: justify;
-
-
 }
 .detail img {
   width: 350px;
@@ -33,11 +31,14 @@
   border-radius: 0.25rem;
   margin: 20px 0;
 }
-.temp li {
-  display: inline-block;
-  margin-left: 5px;
-  font-weight: bolder;
+.temps {
+  margin: 15px 0;
+  margin-right: 25px;
 }
-.temp li:not(:last-child):after {
+.temps li {
+  display: inline-block;
+  margin-right: 5px;
+}
+.temps li:not(:last-child):after {
   content: ",";
 }

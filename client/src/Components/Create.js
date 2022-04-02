@@ -99,7 +99,6 @@ const Create = () => {
       ...input,
       temperaments: [...input.temperaments, e.target.value],
     });
-    
   }
   function deselectTemp(t) {
     setInput({
@@ -116,7 +115,7 @@ const Create = () => {
     <div>
       <Navbar />
       <div className="input">
-        <h2>Create your new Dog</h2>
+        <h2>Add a new Dog</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="form_1">
             <div className="general">
@@ -160,7 +159,7 @@ const Create = () => {
                 value={input.heightMax || ""}
                 onChange={(e) => handleChange(e)}
               />
-              <label>Cm </label>
+              <span className="sub-span">CM</span>
             </div>
             <div className="general">
               <input
@@ -185,7 +184,7 @@ const Create = () => {
                 value={input.weightMax || ""}
                 onChange={(e) => handleChange(e)}
               />
-              <label>Kg </label>
+              <span className="sub-span"> KG</span>
             </div>
             <div className="general">
               <input
@@ -208,10 +207,10 @@ const Create = () => {
                 name="life_spanMax"
                 min="1"
                 max="30"
-                value={input.life_spanMax || ""}
+                value={input.life_spanMax || "years"}
                 onChange={(e) => handleChange(e)}
               />
-              <label>Years</label>
+              <span className="sub-span">YR.</span>
             </div>
             Temperaments...
             <div className="general selectTemp">

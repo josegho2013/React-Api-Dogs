@@ -5,7 +5,8 @@
   column-span: 2;
   padding: 4% 20%;
   text-align: justify;
-  background-image: url("../../image/fondo2.jpg");
+  background-image: url("../../image/create.jpg");
+  background-size: cover;
 }
 .input form {
   display: flex;
@@ -28,6 +29,14 @@
   box-sizing: border-box;
   margin-right: 10px;
 }
+.sub-span {
+  text-align: center;
+  border-radius: 5px;
+  border-color: hsl(0, 0%, 80%);
+  padding: 14px;
+  margin-left: -10px;
+  background-color: hsl(0, 0%, 80%);
+}
 .name {
   width: 310px;
 }
@@ -46,7 +55,7 @@ input:required {
   border-width: 2px;
 }
 input:required:invalid {
-  border-color: #ff6105;
+  border-color: #fbd02c;
 }
 
 .general {
@@ -88,12 +97,15 @@ input:required:invalid {
   display: flex;
   align-items: center;
   padding: 15px 0;
-  font-size: 30px;
+  font-size: 40px;
   font-family: "Urbanist";
-  background-color: white;
+  /* background-color: white; */
+  color: white;
   margin: auto;
   width: max-content;
   font-size: xxx-large;
+  font-weight: 800;
+  text-shadow: #99c112 7px 8px 12px;
 }
 
 .input button {
@@ -145,11 +157,11 @@ input:required:invalid {
 .popUp a {
   margin-left: 80%;
 }
-.equis_1{
+.equis_1 {
   width: 50%;
   margin: auto;
 }
-.equis{
+.equis {
   cursor: pointer;
   background-color: cadetblue;
   border: 1px solid transparent;

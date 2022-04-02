@@ -30,7 +30,7 @@ const Filters = () => {
   const handleOrder = (e) => {
     if (e.target.value === "Ascendent") {
       dispatch(filterOrderAsc(e.target.value));
-    } else if(e.target.value === "Descendent"){
+    } else if (e.target.value === "Descendent") {
       dispatch(filterOrderDes(e.target.value));
     } else {
       dispatch(getAllDogs());
@@ -40,17 +40,17 @@ const Filters = () => {
   const handleWeight = (e) => {
     if (e.target.value === "Lighter") {
       dispatch(filterByWeighLighter(e.target.value));
-    } else if(e.target.value === "Heavier"){
+    } else if (e.target.value === "Heavier") {
       dispatch(filterByWeightHighest(e.target.value));
     } else {
       dispatch(getAllDogs());
     }
   };
-  
+
   const handleLifeSpan = (e) => {
     if (e.target.value === "Young") {
       dispatch(filterLifeSpanMenor(e.target.value));
-    } else if(e.target.value === "Old"){
+    } else if (e.target.value === "Old") {
       dispatch(filterLifeSpanMayor(e.target.value));
     } else {
       dispatch(getAllDogs());
@@ -107,7 +107,6 @@ const Filters = () => {
         </select>
       </div>
       <div>
-        
         <div>
           <p>Life Span:</p>
           <select onChange={(e) => handleLifeSpan(e)}>

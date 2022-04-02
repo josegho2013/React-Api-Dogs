@@ -8,13 +8,13 @@ const Card = ({ image, name, temperaments, id, weight, life_span }) => {
       <img className="img" src={image} alt="" height="200px" width="200px" />
       <div className="info">
         <h2>{name}</h2>
-        <h3>My temperament is : </h3>
         <div className="temp">
+          <h3>My temperament is: </h3>
           {temperaments.map((t) => {
             return <li key={t.name}>{t.name}</li>;
           })}
         </div>
-        <h5>Weight: {name} kg</h5>
+        <h5>Weight: {weight} kg</h5>
         <h5>Life Span: {life_span}</h5>
 
         <Link to={`/CardDetail/${id}`}>

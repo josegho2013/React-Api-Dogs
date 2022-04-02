@@ -1,8 +1,14 @@
-.home{
+.home {
   min-height: 420px;
+  background-image: url("../../image/test3.png");
+  background-size: contain;
 }
-
-
+.home2 {
+  min-height: 420px;
+  background-image: url("../../image/test3.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .dogs {
   display: grid;
   grid: auto-flow / 1fr 1fr;
@@ -21,7 +27,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.noSearch{
+.noSearch {
   display: block;
   max-width: 400px;
   margin: auto;

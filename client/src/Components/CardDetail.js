@@ -13,7 +13,7 @@ const CardDetail = ({ id }) => {
   const dispatch = useDispatch();
   const searchId = useSelector(({ searchById }) => searchById);
   const [deleted, setDeleted] = useState(false);
-  
+
   useEffect(() => {
     dispatch(searchById(id));
   }, [dispatch, id]);
@@ -46,15 +46,15 @@ const CardDetail = ({ id }) => {
                 <p>weight: {searchId?.weight?.metric} kg </p>
               )}
 
-              <p>Life Span: {searchId?.life_span} Años</p>
+              <p>Life Span: {searchId?.life_span}</p>
 
               <h3>Temperaments</h3>
               {typeof searchId?.temperaments === "string" ? (
-                <div className="temp">
+                <div className="temps">
                   <li>{searchId?.temperaments}</li>
                 </div>
               ) : (
-                <div className="temp">
+                <div className="temps">
                   {searchId?.temperaments?.map((a) => {
                     return <li key={a.id}>{a.name}</li>;
                   })}

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@200&display=swap");
+
 .card {
   display: flex;
   justify-content: space-around;
@@ -5,50 +7,75 @@
   width: 465px;
   height: auto;
   margin-top: 6%;
-
   font-family: monospace;
   align-items: center;
   cursor: pointer;
   border-radius: 34px;
-  border: 1px solid #797979;
   flex: 0 0 30%;
   background-color: hsla(0, 0%, 94.5%, 0.8);
   box-shadow: 6px 6px 10px rgb(71 71 71 / 43%);
-  /* background-image: url("../../image/card.jpg");
-  background-size: cover; */
-
+  font-family: "Saira Semi Condensed", sans-serif;
 }
-.btn_card{
-  border-radius: 10px;
-  /* background-color: cadetblue; */
-  border: 2px solid cadetblue
+
+.btn_card {
+  cursor: pointer;
+  line-height: 1.5;
+  background-color: white;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  font-variant: small-caps;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+.btn_card:hover {
+  background-color: #e5ba2e85;
+  box-shadow: 0px 15px 20px rgba(229, 165, 46, 0.301);
+  color: #fff;
 }
 
 .img {
   justify-content: center;
   object-fit: cover;
-  width: 40%;
+  width: 60%;
   border-bottom-left-radius: 34px;
   border-top-left-radius: 34px;
-  border: 1px solid #797979;
   min-height: 100%;
+  transition: 1.3s;
 }
+
 .info {
-  width: 60%;
+  width: 40%;
   margin-bottom: 2%;
-  /* background-image: url("../../image/card.jpg");
-  background-size: cover; */
+  text-align: start;
+  padding: 16px;
 }
-.card:hover {
-  transform: scale(1.07);
-  background-color: rgba(95, 158, 160, 0.616);
+.temp {
+  display: none;
+  margin-bottom: 15px;
 }
 
 .temp li {
   display: inline-block;
-  margin-left: 5px;
+  margin-right: 5px;
   font-weight: bolder;
 }
 .temp li:not(:last-child):after {
   content: ",";
+}
+.card:hover img {
+  transition: 1.3s;
+  width: 40%;
+}
+.card:hover .info {
+  transition: 1.3s;
+  width: 60%;
+}
+.card:hover .temp {
+  display: block;
+}
+.info h5,
+h3 {
+  margin: 0;
 }

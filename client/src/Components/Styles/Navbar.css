@@ -6,8 +6,10 @@
   padding: 30px 9%;
   justify-content: space-between;
   align-items: center;
-  background-color: cadetblue;
+  background-color: rgb(225 181 22 / 96%);
+  background-color: #fbd02c;
   font-family: "Urbanist";
+  font-variant: small-caps;
 }
 .navbar button {
   cursor: pointer;
@@ -39,7 +41,7 @@
   justify-content: space-between;
   width: 18%;
 }
-.landing_link{
+.landing_link {
   text-decoration: none;
   color: white;
 }
